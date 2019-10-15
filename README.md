@@ -15,7 +15,29 @@ This module has additional configuration option:
 image_filter_crop_offset {left,center,right} {top,center,bottom};
 ```
 
+## build
+download nginx source,override the  `ngx_http_image_filter_module.c`
+* nginx installed
+```
+nginx -V
+./configure // copy config from nginx-v
+make
+```
+replace objs/modules/ngx_http_image_filter_module.so
+
+* nginx not installed
+```
+./configure --with-http_image_filter_module=dynamic
+// other configs
+make && make install
+```
+
 ## Examples
+
+### conf
+[example conf](example/nginx.conf "example conf")
+
+[http://localhost:8888/crop/768/example.jpg](http://localhost:8888/crop/768/example.jpg "example link")
 
 ### Vertical images
 
@@ -53,7 +75,11 @@ image_filter_crop_offset {left,center,right} {top,center,bottom};
 
 ![Aligned to right horizontal image](https://raw.github.com/bobrik/nginx_image_filter/master/example/horizontal-right.jpg "Aligned to right horizontal image")
 
+## ChangLog
+2019/10/15 base on nginx 1.13.0/src/http/modules/ngx_http_image_filter_module.c,works on nginx-1.10.3 above
+
 ## Authors
 
 * [Nginx authors](http://nginx.org/)
 * [Ian Babrou](https://github.com/bobrik)
+
